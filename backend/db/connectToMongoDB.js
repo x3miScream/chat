@@ -14,3 +14,4 @@ const connectoToMongoDB = async () => {
 module.exports = {
     connectoToMongoDB
 }
+
