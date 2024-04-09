@@ -28,7 +28,7 @@ const useLogin = () => {
             if(data.error){
                 throw new Error(data.error);
             }
-
+            console.log(res);
             console.log(data);
 
             //localstorage
