@@ -29,15 +29,22 @@ const loginUser = async (req, res) => {
 
         if(errors.length > 0)
         {
-            res.status(400).json({errors: errors});
+            res.status(400).json({error: errors.concat()});
         }
         else{
-            res.status(200).json({message: 'Login Success'});
+            res.status(200).json({
+                _id: user._id,
+                fullName: user.fullName,
+                username: user.username,
+                profilePic: user.profilePic,
+                gender: user.gender,
+                message: 'Login Success'
+            });
         }
     }
     catch(error){
         console.log(`Error in authController during login: ${error.message}`);
-        res.status(500).json({errors: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 
@@ -52,7 +59,7 @@ const logoutUser = async (req, res) => {
     }
     catch(error) {
         console.log(`Error in authController during logout: ${error.message}`);
-        res.status(500).json({errors: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 
@@ -77,7 +84,7 @@ const signup = async (req, res) => {
 
         if(errors.length > 0)
         {
-            return res.status(400).json({errors: errors});
+            return res.status(400).json({error: errors.concat()});
         }
 
         // HASH PASSOWRD HERE
@@ -114,12 +121,12 @@ const signup = async (req, res) => {
         }
         else
         {
-            res.status(400).json({errors: ['Invalid user data']});
+            res.status(400).json({error: 'Invalid user data'});
         }
     }
     catch(error){
         console.log(`Error in signup controller`, error.message);
-        res.status(500).json({errors:['Internal Server Error.']})
+        res.status(500).json({error:'Internal Server Error.'})
     }
 };
 

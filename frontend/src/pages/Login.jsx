@@ -47,7 +47,13 @@ const Login = () => {
                     </Link>
 
                     <div>
-                        <button className='btn btn-block btn-sm mt-2'>Login</button>
+                    {
+                        !loadingState ? (
+                            <button className='btn btn-block btn-sm mt-2'>Login</button>
+                        ) : (
+                            <span className='loading loading-spinner'></span>
+                        )
+                    }
                     </div>
                 </form>
             </div>

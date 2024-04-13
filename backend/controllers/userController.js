@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
     }
     catch(error){
         console.log(`Error in userController during getAll: ${error.message}`);
-        res.status(500).json({messages: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 
@@ -17,11 +17,11 @@ const getAllUsersForSidebar = async (req, res) => {
         const loggedInUserId = req.user._id;
         const users = await User.find({ _id: { $ne: loggedInUserId } }).select('-password');
 
-        return res.status(200).json({messages: [], users: users});
+        return res.status(200).json(users);
     }
     catch(error){
         console.log(`Error in userController during getAll: ${error.message}`);
-        res.status(500).json({messages: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 
@@ -39,7 +39,7 @@ const getById = async (req, res) => {
     }
     catch(error){
         console.log(`Error in userController during getById: ${error.message}`);
-        res.status(500).json({messages: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 

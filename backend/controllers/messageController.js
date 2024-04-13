@@ -13,11 +13,11 @@ const getMessages = async (req, res) => {
             participants: {$all: [senderId, userToChatId]}
         }).populate('messages'); // populate message objects by foreign key reference
 
-        res.status(200).json({messages: (conversation ? conversation.messages : [])});
+        res.status(200).json((conversation ? conversation.messages : []));
     }
     catch(error){
         console.log(`Error in message controller in getMessages: ${error.message}`);
-        res.status(500).json({messages: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 }
 
@@ -62,11 +62,11 @@ const sendMessage = async (req, res) => {
         await Promise.all([newMessage.save(), conversation.save()]);
 
         console.log(`Sent message successfully: Receiver: ${newMessage}`);
-        res.status(201).json({messages: [`Message sent successfully: ${newMessage}`]});
+        res.status(201).json(newMessage);
     }
     catch(error){
         console.log(`Error in message controller during sending a message: ${error.message}`);
-        res.status(500).json({messages: ['Internal Server Error']});
+        res.status(500).json({error: 'Internal Server Error'});
     }
 };
 
