@@ -6,8 +6,9 @@ const authenticationRoutes = require('./routes/authenticationRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const messageRoutes = require('./routes/messageRoutes.js');
 const connectToMongoDB = require('./db/connectToMongoDB.js');
+const {app, server} = require('./socket/socket.js');
 
-const app = express();
+
 const PORT = process.env.PORT || 8000;
 
 
@@ -45,7 +46,8 @@ app.get('/', (req, res) => {
 
 
 
-app.listen(PORT, () => {
+// app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectToMongoDB.connectoToMongoDB();
 
     console.log(`service is running on ${PORT}`);

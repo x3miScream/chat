@@ -1,5 +1,6 @@
 const { Conversation } = require("../models/conversation.model");
 const { Message } = require("../models/mssage.model");
+const { getReceiverSocketId, io } = require("../socket/socket");
 
 
 
@@ -21,7 +22,13 @@ const getMessages = async (req, res) => {
     }
 }
 
+const pushMessageToReceiverClient = (receiverId, newMessage) => {
+    const receiverSocketId = getReceiverSocketId(receiverId)
 
+    if(receiverSocketId) {
+        io.to(receiverSocketId).emit('newMessageEvent', newMessage);
+    }
+};
 
 const sendMessage = async (req, res) => {
     try{
@@ -52,14 +59,10 @@ const sendMessage = async (req, res) => {
             // await conversation.save();
         }
 
-
+        await Promise.all([newMessage.save(), conversation.save()]);
 
         // SOCKET IO Functionality will go here
-
-
-
-
-        await Promise.all([newMessage.save(), conversation.save()]);
+        pushMessageToReceiverClient(receiverId, newMessage);
 
         console.log(`Sent message successfully: Receiver: ${newMessage}`);
         res.status(201).json(newMessage);

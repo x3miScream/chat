@@ -13,6 +13,9 @@ const Message = ({message}) => {
     const chatBubbleProfilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
     const chatBubbleBackgroundColor = fromMe ? 'bg-blue-500' : '';
     const chatBubbleFormattedTime = extractTime(message.createdAt);
+    const shakeClass = message.shouldShake ? 'shake' : '';
+
+    console.log(shakeClass);
 
     return(
         <div className={`chat ${chatBubbleAlignmentClass}`}>
@@ -21,7 +24,7 @@ const Message = ({message}) => {
                     <img src={chatBubbleProfilePic} alt="User Avatar" />
                 </div>
             </div>
-            <div className={`chat-bubble text-white pb-2 ${chatBubbleBackgroundColor}`}>{message.message}</div>
+            <div className={`chat-bubble text-white pb-2 ${chatBubbleBackgroundColor} ${shakeClass}`}>{message.message}</div>
             <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{chatBubbleFormattedTime}</div>
         </div>
     )
