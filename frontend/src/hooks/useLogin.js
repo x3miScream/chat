@@ -15,7 +15,6 @@ const useLogin = () => {
         setLoadingState(true);
 
         try{
-            toast.success(`${process.env.REACT_APP_SERVER_HOST_URL}/api/auth/login`)
             const res = await fetch(
                 `${process.env.REACT_APP_SERVER_HOST_URL}/api/auth/login`,
                 {
