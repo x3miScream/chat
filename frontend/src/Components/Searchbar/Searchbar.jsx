@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 
 const Searchbar = () => {
     const [search, setSearch] = useState('');
-
     const {setSelectedConversation} = useConversation();
     const {conversations} = useGetConversations();
 

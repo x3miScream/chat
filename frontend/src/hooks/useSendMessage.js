@@ -11,7 +11,7 @@ const useSendMessage = () => {
             setLoadingState(true);
 
             const res = await fetch(
-                `http://localhost:8000/api/message/send/${selectedConversation._id}`,
+                `${process.env.REACT_APP_SERVER_HOST_URL}/api/message/send/${selectedConversation._id}`,
                 {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},

@@ -11,7 +11,7 @@ const useGetConversations = () => {
                 setLoadingState(true);
 
                 const res = await fetch(
-                    'http://localhost:8000/api/user/getAllUsersForSidebar',
+                    `${process.env.REACT_APP_SERVER_HOST_URL}/api/user/getAllUsersForSidebar`,
                     {
                         method: 'GET',
                         headers: {'Content-Type': "application/json"},

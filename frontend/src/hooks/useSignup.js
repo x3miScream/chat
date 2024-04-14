@@ -16,7 +16,7 @@ const useSignup = () => {
 
         try{
             const res = await fetch(
-                'http://localhost:8000/api/auth/signup',
+                `${process.env.REACT_APP_SERVER_HOST_URL}/api/auth/signup`,
                 {
                     method: 'POST',
                     headers: {'Content-Type': "application/json"},

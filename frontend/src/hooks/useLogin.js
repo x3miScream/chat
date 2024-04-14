@@ -15,8 +15,9 @@ const useLogin = () => {
         setLoadingState(true);
 
         try{
+            toast.success(`${process.env.REACT_APP_SERVER_HOST_URL}/api/auth/login`)
             const res = await fetch(
-                'http://localhost:8000/api/auth/login',
+                `${process.env.REACT_APP_SERVER_HOST_URL}/api/auth/login`,
                 {
                     method: 'POST',
                     headers: {'Content-Type': "application/json"},
