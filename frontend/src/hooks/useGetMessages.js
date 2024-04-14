@@ -10,7 +10,7 @@ const useGetMessages = () => {
             setLoadingState(true);
     
             const res = await fetch(
-                `http://{selectedConversation._id}`,
+                `${process.env.REACT_APP_SERVER_HOST_URL}/api/message/${selectedConversation._id}`,
                 {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
