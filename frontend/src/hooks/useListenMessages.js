@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSocketContext } from '../Context/SocketContext';
 import useConversation from '../zustand/useConversation';
+import meowNotificationSound from '../assets/sounds/meowNotificationSound.mp3';
 
 const useListenMessages = () => {
     const {socket} = useSocketContext();
@@ -9,6 +10,8 @@ const useListenMessages = () => {
     useEffect(() => {
         socket?.on('newMessageEvent', (newMessage) => {
             newMessage.shouldShake = true;
+            const sound = new Audio(meowNotificationSound);
+            sound.play();
             setMessages([...messages, newMessage]);
         });
 
