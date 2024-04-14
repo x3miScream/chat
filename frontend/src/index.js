@@ -10,7 +10,8 @@ import { SocketContextProvider } from './Context/SocketContext.jsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter  basename='/chat'>
+    {/* <BrowserRouter  basename='/chat'> */}
+    <BrowserRouter  basename=''>
       <AuthContextProvider>
         <SocketContextProvider>
           <App />

@@ -7,10 +7,11 @@ const userRoutes = require('./routes/userRoutes.js');
 const messageRoutes = require('./routes/messageRoutes.js');
 const connectToMongoDB = require('./db/connectToMongoDB.js');
 const {app, server} = require('./socket/socket.js');
-
+const path = require('path');
 
 const PORT = process.env.PORT || 8000;
 
+// const __dirname = path.resolve();
 
 dotenv.config();
 
@@ -37,13 +38,17 @@ app.use('/api/user', userRoutes);
 //messages routes
 app.use('/api/message', messageRoutes);
 
-app.get('/', (req, res) => {
-    res.send('default route');
+// app.get('/', (req, res) => {
+//     res.send('default route');
+// });
+
+
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+    console.log(path.join(__dirname, '../frontend', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
 });
-
-
-
-
 
 
 // app.listen(PORT, () => {
