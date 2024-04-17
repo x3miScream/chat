@@ -5,14 +5,20 @@ import meowNotificationSound from '../assets/sounds/meowNotificationSound.mp3';
 
 const useListenMessages = () => {
     const {socket} = useSocketContext();
-    const {messages, setMessages} = useConversation();
+    const {messages, setMessages, selectedConversation} = useConversation();
 
     useEffect(() => {
         socket?.on('newMessageEvent', (newMessage) => {
             newMessage.shouldShake = true;
             const sound = new Audio(meowNotificationSound);
             sound.play();
-            setMessages([...messages, newMessage]);
+
+            if(selectedConversation._id === newMessage.senderId)
+            {
+                setMessages([...messages, newMessage]);
+            }
+            //else
+            
         });
 
         return () => socket.off('newMessageEvent');
